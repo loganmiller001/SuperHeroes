@@ -27,8 +27,7 @@ namespace SuperHeroes.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                return View(superHeroes);
+                db.SaveChanges();
             }
 
             return View(superHeroes);
