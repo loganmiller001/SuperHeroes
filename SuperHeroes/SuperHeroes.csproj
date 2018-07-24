@@ -202,9 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807241446384_MySuperHeroMigration.cs" />
-    <Compile Include="Migrations\201807241446384_MySuperHeroMigration.Designer.cs">
-      <DependentUpon>201807241446384_MySuperHeroMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201807241840486_SuperHeroesMigration.cs" />
+    <Compile Include="Migrations\201807241840486_SuperHeroesMigration.Designer.cs">
+      <DependentUpon>201807241840486_SuperHeroesMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -295,8 +295,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807241446384_MySuperHeroMigration.resx">
-      <DependentUpon>201807241446384_MySuperHeroMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807241840486_SuperHeroesMigration.resx">
+      <DependentUpon>201807241840486_SuperHeroesMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
