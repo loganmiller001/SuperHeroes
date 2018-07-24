@@ -18,17 +18,19 @@ namespace SuperHeroes.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.SuperId = new SelectList(db.SuperHero, "ID", "Name");
             return View();
         }
 
         [AcceptVerbs]
         [HttpPost]
-        public ActionResult Create(SuperHero superHero)
+        public ActionResult Create([Bind(Include = "Name, AlterEgo, PrimaryPower, SecondaryPower, CatchPhrase")]SuperHero superHero)
         {
             if (ModelState.IsValid)
             {
                 db.SuperHero.Add(superHero);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             return View(superHero);
