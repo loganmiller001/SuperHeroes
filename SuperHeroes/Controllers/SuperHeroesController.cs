@@ -54,8 +54,13 @@ namespace SuperHeroes.Controllers
             return View();
         }
 
-        public ActionResult Delete()
+        public ActionResult Delete(SuperHero superHero)
         {
+            SuperHero hero = (from h in db.SuperHeroes
+                              where h.SuperId == superHero.SuperId
+                              select h).FirstOrDefault();
+            db.SuperHeroes.Remove(hero);
+            db.SaveChanges();
             return View();
         }
     }
