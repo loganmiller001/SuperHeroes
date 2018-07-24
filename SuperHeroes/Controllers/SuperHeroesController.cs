@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace SuperHeroes.Controllers
 {
-    public class SuperHeroes : Controller
+    public class SuperHeroesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: SuperHeroes
@@ -18,11 +18,10 @@ namespace SuperHeroes.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.SuperId = new SelectList(db.SuperHero, "ID", "Name");
+            ViewBag.SuperId = new SelectList(db.SuperHero, "SuperId", "Name");
             return View();
         }
 
-        [AcceptVerbs]
         [HttpPost]
         public ActionResult Create([Bind(Include = "Name, AlterEgo, PrimaryPower, SecondaryPower, CatchPhrase")]SuperHero superHero)
         {
@@ -36,7 +35,7 @@ namespace SuperHeroes.Controllers
             return View(superHero);
         }
 
-        public ActionResult Update(SuperHero superHero)
+        public ActionResult Edit(SuperHero superHero)
         {
             SuperHero updatedHero = (from s in db.SuperHero
                                      where s.SuperId == superHero.SuperId
