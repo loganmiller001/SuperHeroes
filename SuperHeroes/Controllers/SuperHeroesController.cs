@@ -13,7 +13,7 @@ namespace SuperHeroes.Controllers
         // GET: SuperHeroes
         public ActionResult Index()
         {
-            return View(db.SuperHeroes.ToList());
+            return View(db.SuperHero.ToList());
         }
 
         public ActionResult Create()
@@ -27,7 +27,7 @@ namespace SuperHeroes.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SuperHeroes.Add(superHero);
+                db.SuperHero.Add(superHero);
                 db.SaveChanges();
             }
 
@@ -36,7 +36,7 @@ namespace SuperHeroes.Controllers
 
         public ActionResult Update(SuperHero superHero)
         {
-            SuperHero updatedHero = (from s in db.SuperHeroes
+            SuperHero updatedHero = (from s in db.SuperHero
                                      where s.SuperId == superHero.SuperId
                                      select s).FirstOrDefault();
             updatedHero.Name = superHero.Name;
@@ -49,17 +49,12 @@ namespace SuperHeroes.Controllers
             return View();
         }
 
-        public ActionResult Read()
-        {
-            return View();
-        }
-
         public ActionResult Delete(SuperHero superHero)
         {
-            SuperHero hero = (from h in db.SuperHeroes
+            SuperHero hero = (from h in db.SuperHero
                               where h.SuperId == superHero.SuperId
                               select h).FirstOrDefault();
-            db.SuperHeroes.Remove(hero);
+            db.SuperHero.Remove(hero);
             db.SaveChanges();
             return View();
         }

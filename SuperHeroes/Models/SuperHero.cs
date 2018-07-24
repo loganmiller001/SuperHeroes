@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SuperHeroes.Models
 {
-    public class SuperHeroes
+    public class SuperHero
     {
         [Key]
         public int SuperId { get; set; }
