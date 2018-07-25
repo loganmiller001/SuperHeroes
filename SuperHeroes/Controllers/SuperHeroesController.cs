@@ -42,7 +42,7 @@ namespace SuperHeroes.Controllers
             return View(deleteHero);
         }
 
-        [HttpPost]
+        
         public ActionResult Edit(int id, SuperHero superHero)
         {
             SuperHero updatedHero = (from s in db.SuperHero
