@@ -42,10 +42,10 @@ namespace SuperHeroes.Controllers
             return View(deleteHero);
         }
 
-        public ActionResult Edit(string name, SuperHero superHero)
+        public ActionResult Edit(int id, SuperHero superHero)
         {
             SuperHero updatedHero = (from s in db.SuperHero
-                                     where s.Name == name
+                                     where s.SuperId == id
                                      select s).FirstOrDefault();
             updatedHero.Name = superHero.Name;
             updatedHero.PrimaryPower = superHero.PrimaryPower;
@@ -72,22 +72,20 @@ namespace SuperHeroes.Controllers
 
         }
 
-        public ActionResult Details(string SuperId = null)
+        public ActionResult Details(int id)
         {
-            SuperHero superHero = db.SuperHero.Find(SuperId);
+            SuperHero display = (from d in db.SuperHero
+                                where d.SuperId == id
+                                select d).FirstOrDefault();
+            SuperHero superHero = db.SuperHero.Find(id);
             superHero.Name = superHero.Name;
             superHero.PrimaryPower = superHero.PrimaryPower;
             superHero.SecondaryPower = superHero.SecondaryPower;
             superHero.AlterEgo = superHero.AlterEgo;
             superHero.CatchPhrase = superHero.CatchPhrase;
 
-            return RedirectToAction("Details");
-            //if (superHero == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            return View("Details");
 
-            //return View(superHero);
         }
     }
 }
