@@ -10,7 +10,6 @@ namespace SuperHeroes.Controllers
     public class SuperHeroesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        // GET: SuperHeroes
         public ActionResult Index()
         {
             return View(db.SuperHero.ToList());
@@ -35,10 +34,18 @@ namespace SuperHeroes.Controllers
             return View(superHero);
         }
 
-        public ActionResult Edit(SuperHero superHero)
+        public ActionResult Delete(int id)
+        {
+            var deleteHero = (from h in db.SuperHero
+                              where h.SuperId == id
+                              select h).FirstOrDefault();
+            return View(deleteHero);
+        }
+
+        public ActionResult Edit(string name, SuperHero superHero)
         {
             SuperHero updatedHero = (from s in db.SuperHero
-                                     where s.SuperId == superHero.SuperId
+                                     where s.Name == name
                                      select s).FirstOrDefault();
             updatedHero.Name = superHero.Name;
             updatedHero.PrimaryPower = superHero.PrimaryPower;
@@ -50,14 +57,37 @@ namespace SuperHeroes.Controllers
             return View();
         }
 
-        public ActionResult Delete(SuperHero superHero)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            SuperHero hero = (from h in db.SuperHero
-                              where h.SuperId == superHero.SuperId
-                              select h).FirstOrDefault();
-            db.SuperHero.Remove(hero);
-            db.SaveChanges();
-            return View();
+            SuperHero superHero = db.SuperHero.Find(id);
+            if (ModelState.IsValid)
+            {
+                db.SuperHero.Remove(superHero);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(superHero);
+
+        }
+
+        public ActionResult Details(string SuperId = null)
+        {
+            SuperHero superHero = db.SuperHero.Find(SuperId);
+            superHero.Name = superHero.Name;
+            superHero.PrimaryPower = superHero.PrimaryPower;
+            superHero.SecondaryPower = superHero.SecondaryPower;
+            superHero.AlterEgo = superHero.AlterEgo;
+            superHero.CatchPhrase = superHero.CatchPhrase;
+
+            return RedirectToAction("Details");
+            //if (superHero == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            //return View(superHero);
         }
     }
 }
