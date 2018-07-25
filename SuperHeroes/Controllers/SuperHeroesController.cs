@@ -42,6 +42,7 @@ namespace SuperHeroes.Controllers
             return View(deleteHero);
         }
 
+        [HttpPost]
         public ActionResult Edit(int id, SuperHero superHero)
         {
             SuperHero updatedHero = (from s in db.SuperHero
@@ -78,13 +79,12 @@ namespace SuperHeroes.Controllers
                                 where d.SuperId == id
                                 select d).FirstOrDefault();
             SuperHero superHero = db.SuperHero.Find(id);
-            superHero.Name = superHero.Name;
-            superHero.PrimaryPower = superHero.PrimaryPower;
-            superHero.SecondaryPower = superHero.SecondaryPower;
-            superHero.AlterEgo = superHero.AlterEgo;
-            superHero.CatchPhrase = superHero.CatchPhrase;
-
-            return View("Details");
+            display.Name = superHero.Name;
+            display.PrimaryPower = superHero.PrimaryPower;
+            display.SecondaryPower = superHero.SecondaryPower;
+            display.AlterEgo = superHero.AlterEgo;
+            display.CatchPhrase = superHero.CatchPhrase;
+            return View(display);
 
         }
     }
