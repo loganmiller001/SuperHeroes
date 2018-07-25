@@ -42,7 +42,14 @@ namespace SuperHeroes.Controllers
             return View(deleteHero);
         }
 
-        
+        public ActionResult Edit(int id)
+        {
+            var display = (from s in db.SuperHero where s.SuperId == id select s).FirstOrDefault();
+            return View(display);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, SuperHero superHero)
         {
             SuperHero updatedHero = (from s in db.SuperHero
